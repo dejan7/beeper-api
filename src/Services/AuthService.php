@@ -22,7 +22,7 @@ class AuthService
         $token = [
             "iss" => "beeper",
             "iat" => time(), //time issued
-            "exp" => time() * 60 * 240, //keep token valid for 4 hours,
+            "exp" => time() + 3600 * 4, //keep token valid for 4 hours,
             "user_id" => $user['id']
         ];
 
@@ -31,7 +31,7 @@ class AuthService
 
     public function getCurrentUser()
     {
-        $expMessage = 'Looks like your session expired or you weren\'t expired, please log in again.';
+        $expMessage = 'Looks like your session expired or you weren\'t logged in, please log in again.';
         $errMessage = "There was an issue while attempting to authorize your request, please login again.";
 
         $token = isset($_SERVER['HTTP_AUTHORIZATION']) ? $_SERVER['HTTP_AUTHORIZATION'] : null;
