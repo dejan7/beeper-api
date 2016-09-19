@@ -27,16 +27,6 @@ class BeepHandler
         $this->authService = $authService;
     }
 
-    public function postBeep(CreateBeepValidator $validator)
-    {
-        $validator->validate();
-
-        $user = $this->authService->getCurrentUser();
-        $this->beeps->create($this->request->getParameters(), $user);
-
-        $this->response->setStatusCode(201);
-    }
-
     public function getAllBeeps(MicroPaginator $paginator)
     {
         $beeps = $this->beeps->find();
@@ -47,5 +37,15 @@ class BeepHandler
         $results = $paginator->paginate($beeps, $page);
 
         $this->response->setContent($results);
+    }
+
+    public function postBeep(CreateBeepValidator $validator)
+    {
+        $validator->validate();
+
+        $user = $this->authService->getCurrentUser();
+        $this->beeps->create($this->request->getParameters(), $user);
+
+        $this->response->setStatusCode(201);
     }
 }

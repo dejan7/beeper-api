@@ -18,8 +18,8 @@ $httpquest->decode($_POST, $_FILES);
  */
 $injector = include('Dependencies.php');
 
-$request = $injector->make('Http\HttpRequest');
-$response = $injector->make('BeeperApi\HttpResponse');
+$request = $injector->make('Http\Request');
+$response = $injector->make('Http\Response');
 
 /**
  * ROUTE DISPATCHER

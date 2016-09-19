@@ -28,7 +28,7 @@ class AuthHandler
 
     public function login()
     {
-        $user = $this->users->get([
+        $user = $this->users->first([
             'username' => $this->request->getParameter('username'),
             'password' => $this->request->getParameter('password')
         ]);
