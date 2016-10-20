@@ -2,41 +2,38 @@ FORMAT: 1A
 HOST: http://localhost:XXXX
 
 # Beeper API
-Beeper is a simple microblogging platform (created for Udemy course)
+Beeper is an imaginary microblogging platform, created for Udemy course
 
-## Authorization
-Also Markdown *formatted*. This also includes automatic "smartypants" formatting -- hooray!
-
-> "A quote from another time and place"
-
-Another paragraph. Code sample:
+## Authentication
+Beeper uses JWT (JSON Web Tokens) for authentication. For protected endpoints you'll need add the following HTTP header:
 
 ```http
-Authorization: bearer 5262d64b892e8d4341000001
+Authorization: bearer {token-string}
 ```
 
-And some code with no highlighting:
+where {token-string} is the actual JWT token you obtained beforehand. **Tokens are valid for 4 hours.**
 
-```no-highlight
-Foo bar baz
-```
-
-1. A list
-2. Of items
-3. Can be
-4. Very useful
-
-Here is a table:
-
-ID | Name | Description
---:| ---- | -----------
- 1 | Foo  | I am a foo.
- 8 | Bar  | I am a bar.
-15 | Baz  | I am a baz.
 
 ## Error Handling
-aasd
+For all user level errors, Beeper API will return a HTTP response 422 with the following structure
 
+```javascript
+{
+    status: 422,
+    message: "Unprocessable Entity",
+    errors: ['Error 1', 'Error 2', ...]
+}
+```
+
+For example, if a user submits empty form during registration, API will return this message:
+
+```javascript
+{
+    code: 422
+    message:"Unprocessable Entity"
+    errors: ["Username is required", "Username must be between 3 and 30 characters", "Email is required",…]
+}
+```
 
 # Group Authentication
 
