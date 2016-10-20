@@ -55,7 +55,7 @@ class UserHandler
             $this->response->setContent([
                 'username' => $user['username'],
                 'about'    => $user['about'],
-                'avatar'   => $_SERVER['HTTP_HOST'] . '/images/' . $user['avatar']
+                'avatar'   => 'http://' . $_SERVER['HTTP_HOST'] . '/public/images/' . $user['avatar']
             ]);
         }
 
@@ -67,7 +67,9 @@ class UserHandler
 
         $user = $this->authService->getCurrentUser();
 
-        $this->users->update($user['id'], $this->request->getParameters());
+        $params = $this->request->getParameters();
+
+        $this->users->update($user['id'], ['username' => $params['username'], 'about' => $params['about']]);
     }
 
     public function putAvatar(AvatarValidator $validator)
@@ -76,10 +78,18 @@ class UserHandler
 
         $user = $this->authService->getCurrentUser();
 
+        if ($user['avatar'] != "noavatar.jpg") {
+            unlink(getcwd() . '/public/images/' . $user['avatar']);
+        }
+
         $ext = explode('.', $_FILES['avatar']['name']);
-        $avatarName = $user['id'] . '.' . $ext[1];
+        $avatarName = $user['id'] . '_' . uniqid() . '.' . strtolower($ext[1]);
         copy($_FILES['avatar']['tmp_name'], 'public/images/' . $avatarName);
 
         $this->users->update($user['id'], ['avatar' => $avatarName]);
+
+        $this->response->setContent([
+            'avatar'   => 'http://' . $_SERVER['HTTP_HOST'] . '/public/images/' . $avatarName,
+        ]);
     }
 }

@@ -9,6 +9,6 @@ class CreateBeepValidator extends Validator
     protected function rules()
     {
         $this->validator->rule('required', 'text');
-        $this->validator->rule('lengthBetween', 'text', 10, 320);
+        $this->validator->rule('lengthBetween', 'text', 3, 320);
     }
 }

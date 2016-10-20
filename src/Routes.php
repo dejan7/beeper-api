@@ -13,8 +13,7 @@ return [
     ['GET', '/beeps', ['BeeperApi\Handlers\BeepHandler', 'getAllBeeps']],
     ['POST', '/beeps', ['BeeperApi\Handlers\BeepHandler', 'postBeep']],
     ['GET', '/beeps/{id}', ['BeeperApi\Handlers\BeepHandler', 'getBeep']],
-    ['PATCH', '/beeps/{id}/likes', ['BeeperApi\Handlers\BeepHandler', 'patchLikeBeep']],
-    ['DELETE', '/beeps/{id}/likes', ['BeeperApi\Handlers\BeepHandler', 'deleteUnlikeBeep']],
+    ['PATCH', '/beeps/{id}/like', ['BeeperApi\Handlers\BeepHandler', 'patchLikeBeep']],
 
-    ['POST', '/beeps/{id}/comments', ['BeeperApi\Handlers\BeepCommentHandler', 'postBeepComment']],
+    //['POST', '/beeps/{id}/comments', ['BeeperApi\Handlers\BeepCommentHandler', 'postBeepComment']],
 ];

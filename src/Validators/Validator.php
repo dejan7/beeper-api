@@ -20,10 +20,9 @@ abstract class Validator
         if (!$this->validator->validate()) {
             $errors = [];
             //loop through nested array and get values
-            foreach (new \RecursiveIteratorIterator(new \RecursiveArrayIterator($this->validator->errors()),
-                         \RecursiveIteratorIterator::CATCH_GET_CHILD) as $value)
-            {
-                $errors[] = $value;
+            $it = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($this->validator->errors()));
+            foreach($it as $e) {
+                $errors[] = $e;
             }
             throw new ApiException(422, $errors);
         }

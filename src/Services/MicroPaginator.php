@@ -13,7 +13,7 @@ class MicroPaginator
      */
     public function paginate($items, $page = 1, $perPage = 15)
     {
-        $currentItems = array_slice($items, $page-1 * $perPage, $page * $perPage);
+        $currentItems = array_slice($items, ($page-1) * $perPage, $perPage);
 
         //remove MicroDB indexes
         $currentItems = array_values($currentItems);
@@ -22,7 +22,7 @@ class MicroPaginator
 
         return [
             'data' => $currentItems,
-            'current_page' => $page,
+            'current_page' => (int) $page,
             'last_page' => ceil($totalItems / $perPage),
             'total' => $totalItems
         ];

@@ -1,4 +1,10 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods : HEAD, POST, GET, OPTIONS, PUT, PATCH, DELETE');
+header('Access-Control-Allow-Headers : content-type,x-requested-with,x-api-key,X-ACCOUNT-API-KEY,X-USER-API-KEY,account_api_key,user_api_key, authorization');
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+	return 204;
+}
 
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for

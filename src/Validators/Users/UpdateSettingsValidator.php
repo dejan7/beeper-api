@@ -10,6 +10,7 @@ class UpdateSettingsValidator extends Validator
     {
         $this->validator->rule('lengthBetween', 'username', 3, 30);
         $this->validator->rule('notIn', 'username', ['me']);
+        $this->validator->rule('slug', 'username');
 
         $this->validator->rule('lengthMax', 'about', 500);
 

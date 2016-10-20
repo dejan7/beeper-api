@@ -9,4 +9,8 @@ interface BeepRepository
     public function find($where = null);
 
     public function first($where);
+
+    public function attachAuthors($beeps);
+
+    public function changeLikeState($beepID, $user);
 }

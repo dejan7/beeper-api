@@ -17,8 +17,8 @@ class MicroUser implements UserRepository
     public function create($data)
     {
         if (
-        $this->usersTable->first(function ($user) use ($data) {
-            return $user['username'] == $data['username'] || $data['email'] == $data['email'];
+        $this->usersTable->find(function ($user) use ($data) {
+            return $user['username'] == $data['username'] || $user['email'] == $data['email'];
         })
         ) {
             throw new ApiException(422, ['Username and/or email already taken']);
@@ -94,6 +94,5 @@ class MicroUser implements UserRepository
         }
 
         $this->usersTable->save($foundUserID, $foundUser);
-
     }
 }
